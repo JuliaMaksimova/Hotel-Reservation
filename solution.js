@@ -21,7 +21,7 @@ function changeContent(className) {
 // Initialize: show search form
 changeContent('search-form-content');
 
-// Handle Search Form submission
+/* ---------------- Search Form ---------------- */
 const searchButton = document.querySelector('#search-form-button');
 if (searchButton) {
     searchButton.addEventListener('click', function(e) {
@@ -41,15 +41,58 @@ if (searchButton) {
 
             console.log('Reservation Data:', reservation);
 
-            // Show thank-you form
-            changeContent('thank-you-content');
+            // Show search result / offers form
+            changeContent('search-result-form-content');
         } else {
             alert('Please fill all fields correctly and ensure check-in is before check-out.');
         }
     });
 }
 
-// Handle New Reservation button
+/* ---------------- Offers Form ---------------- */
+// Back button: return to search form and pre-fill values
+const backButton = document.querySelector('#search-back-btn');
+if (backButton) {
+    backButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        changeContent('search-form-content');
+        document.querySelector('#check-in').value = reservation.startDate || '';
+        document.querySelector('#check-out').value = reservation.endDate || '';
+        document.querySelector('#people').value = reservation.guestsCount || '';
+    });
+}
+
+// Select room type
+document.querySelectorAll('.room-type').forEach(room => {
+    room.addEventListener('click', function(e) {
+        e.preventDefault();
+        let selectedRoom = e.target.closest('.room-type');
+        if (!selectedRoom) return;
+
+        document.querySelectorAll('.room-type').forEach(r => r.classList.remove('selected-room'));
+        selectedRoom.classList.add('selected-room');
+    });
+});
+
+// Next button: select room and go to next form
+const nextButton = document.querySelector('#search-next-btn');
+if (nextButton) {
+    nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        const selectedRoomEl = document.querySelector('.selected-room h4');
+        if (!selectedRoomEl) {
+            alert('Please select a room.');
+            return;
+        }
+        reservation.roomType = selectedRoomEl.textContent;
+        console.log('Reservation after room selection:', reservation);
+
+        // Show guest-details form (or thank-you if guest-details not implemented)
+        changeContent('thank-you-content');
+    });
+}
+
+/* ---------------- Thank You Form ---------------- */
 const newReservationButton = document.querySelector('#new-reservation');
 if (newReservationButton) {
     newReservationButton.addEventListener('click', function(e) {

@@ -19,14 +19,13 @@
     </section>
 
     <div class="site-content">   
-        <!-- Site Content -->
-
+        <!-- Search Form -->
         <div class="search-form-content custom-form">
             <div class="background">
                 <div class="shape"></div>
                 <div class="shape"></div>
             </div>
-            <form>
+            <form id="search-form">
                 <h3>Search Here</h3>
 
                 <label for="check-in">Check-in:</label>
@@ -36,24 +35,54 @@
                 <input type="date" id="check-out" name="check-out">
 
                 <label for="people">Numbers of people:</label>
-                <input type="number" min="1" id="people" name="phone-number">
+                <input type="number" min="1" id="people" name="people">
 
-                <button id="search-form-button">Next</button>
+                <button type="submit" id="search-form-button">Next</button>
             </form>
         </div>
 
-        <!-- Thank you, page! -->
-        <div class="thank-you-content custom-form">
+        <!-- Search Result / Offers Form -->
+        <div class="search-result-form-content custom-form hidden">
+            <div class="background">
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+            <form id="offers-form">
+                <h3>Our Offers</h3>
+                <section class="offers">
+                    <article class="offer-card room-type selected-room">
+                        <img src="static/img/budgetRoom.jpg" alt="budget room">
+                        <h4>Budget Room – 120 USD</h4>
+                    </article>
+                    <article class="offer-card room-type">
+                        <img src="static/img/familyRoom.jpg" alt="family room">
+                        <h4>Family Room – 250 USD</h4>
+                    </article>
+                    <article class="offer-card room-type">
+                        <img src="static/img/kingRoom.jpg" alt="king room">
+                        <h4>King Room – 500 USD</h4>
+                    </article>
+                </section>
+                <div class="buttons">
+                    <button type="button" id="search-back-btn">Back</button>
+                    <button type="button" id="search-next-btn">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Thank You Form -->
+        <div class="thank-you-content custom-form hidden">
             <div class="background">
                 <div class="shape"></div>
                 <div class="shape"></div>
             </div>
             <form class="thank-you">
                 <h3>Thank you for your reservation!</h3>
-                <button id="new-reservation">Make new reservation</button>
+                <button type="button" id="new-reservation">Make new reservation</button>
             </form>
         </div>
     </div>
+
     <script src="solution.js"></script>
 </body>
 
